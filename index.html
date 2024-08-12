@@ -59,7 +59,7 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
             width: 90vw;
-            max-width: 1200px; /* Increased max-width for larger content */
+            max-width: 1000px; /* Increased max-width for larger content */
             text-align: center;
         }
         .header {
@@ -90,6 +90,7 @@
             transition: transform 0.3s ease;
             max-width: 100%; /* Ensure it adapts to content */
             overflow: hidden; /* Hide overflow if content is too large */
+            margin-bottom: 20px; /* Space below the panel */
         }
         .panel:hover {
             transform: scale(1.03);
@@ -135,6 +136,29 @@
         .copy-btn:active {
             background: #e03e3e;
         }
+        .tutorial {
+            background: linear-gradient(145deg, #1e1e1e, #2d2d2d); /* Dark gradient for tutorial section */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .tutorial h2 {
+            font-size: 24px;
+            color: #ff4c4c;
+            margin-top: 0;
+        }
+        .tutorial ol {
+            font-size: 16px;
+            color: #ddd;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .tutorial ol li {
+            margin-bottom: 10px;
+        }
         @keyframes slideIn {
             from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -158,6 +182,15 @@
 Invoke-WebRequest -Uri "https://github.com/scriptsurgee/v2Boot/raw/main/v2Boot.exe" -OutFile "$env:USERPROFILE\Downloads\v2Boot.exe" -ErrorAction Stop | Out-Null
             </textarea>
             <button class="copy-btn" onclick="copyText()">Copy</button>
+        </div>
+        <div class="tutorial">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Copy the script above.</li>
+                <li>Open PowerShell (Non-Admin).</li>
+                <li>Paste the script.</li>
+                <li>Wait until it's finished, then run the bootstrapper in File Explorer.</li>
+            </ol>
         </div>
     </div>
     <script>
